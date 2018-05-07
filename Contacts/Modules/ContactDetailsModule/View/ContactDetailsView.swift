@@ -102,3 +102,13 @@ extension ContactDetailsView:ContactDetailsViewProtocol, MFMessageComposeViewCon
     }
     
 }
+
+extension ContactDetailsView : ContactDetailsRefreshDelegate {
+    func refreshData() {
+        //Refresh contact Details
+        presenter?.viewDidLoad()
+        
+        //Also refresh contact list
+        presenter?.refreshContactListScreen()
+    }
+}

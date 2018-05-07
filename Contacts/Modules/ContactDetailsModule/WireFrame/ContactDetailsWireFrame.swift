@@ -14,7 +14,8 @@ class ContactDetailsWireFrame:ContactDetailsWireFrameProtocol {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        if let contactDetailsView = storyBoard.instantiateViewController(withIdentifier: "ContactDetailsView") as? ContactDetailsViewProtocol {
+        if let contactDetailsView = storyBoard.instantiateViewController(withIdentifier: "ContactDetailsView") as? (ContactDetailsViewProtocol & ContactDetailsRefreshDelegate) {
+            
             
             let presenter:ContactDetailsPresenterProtocol & ContactDetailsInteractorOutputProtocol = ContactDetailsPresenter()
             let interactor : ContactDetailsInteractorInputProtocol & ContactDetailsDataManagerOutputProtocol = ContactDetailsInteractor()
@@ -40,12 +41,21 @@ class ContactDetailsWireFrame:ContactDetailsWireFrameProtocol {
     }
     
     
-    func presentEditContactScreen(source view:ContactDetailsViewProtocol, contact: ContactModel) {
+    func presentEditContactScreen(source view:ContactDetailsViewProtocol & ContactDetailsRefreshDelegate, contact: ContactModel) {
         
-        let editContactView = AddOrEditContactWireFrame.createAddOrEditContactModule(with: contact)
+        let editContactView = AddOrEditContactWireFrame.createAddOrEditContactModule(with: contact, listRefreshDelegate: nil, detailsRefreshDelegate: view)
         
         if let sourceView = view as? UIViewController {
             sourceView.present(editContactView, animated: true, completion: nil)
+        }
+    }
+    
+    func presentAddContactScreen(source view:ContactListViewProtocol & ContactListRefreshDelegate){
+        
+        let addContactView = AddOrEditContactWireFrame.createAddOrEditContactModule(with: nil, listRefreshDelegate: view, detailsRefreshDelegate: nil)
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.present(addContactView, animated: true, completion: nil)
         }
     }
     

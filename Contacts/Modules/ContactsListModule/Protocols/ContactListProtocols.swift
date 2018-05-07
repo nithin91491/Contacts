@@ -37,6 +37,7 @@ protocol ContactListPresenterProtocol:class {
     //VIEW -> PRESENTER (It means that, View communicates to presenter using below methods)
     func viewDidLoad()
     func showContactDetail(for contactId:Int)
+    func addNewContact()
     
 }
 
@@ -46,6 +47,8 @@ protocol ContactListWireFrameProtocol:class {
     
     //PRESENTER -> WIREFRAME
     func presentContactDetailView(from view:ContactListViewProtocol & ContactListRefreshDelegate, forContactId id:Int)
+    
+    func presentAddContactScreen(source view:ContactListViewProtocol & ContactListRefreshDelegate)
     
 }
 

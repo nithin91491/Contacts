@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+protocol ContactDetailsRefreshDelegate:class {
+    func refreshData()
+}
+
 protocol AddOrEditContactViewProtocol:class {
     
     var presenter:AddOrEditContactPresenterProtocol? { get set }
@@ -15,6 +20,11 @@ protocol AddOrEditContactViewProtocol:class {
     //PRESENTER -> VIEW
     func displayContactDetails(_ contact:ContactModel)
     func setProfilePic(_ imageData:Data)
+    func showValidationErrorMessage()
+    func showLoading()
+    func hideLoading()
+    func onError()
+    func dismissScreen()
     
 }
 
@@ -26,14 +36,18 @@ protocol AddOrEditContactPresenterProtocol:class {
     
     var contact:ContactModel? { get set }
     
+    //Delegates for refresh
+    var contactListRefreshDelegate:ContactListRefreshDelegate? { get set }
+    var contactDetailsRefreshDelegate:ContactDetailsRefreshDelegate? { get set }
+    
     //VIEW -> PRESENTER
     func viewDidLoad()
-    func addOrUpdateContact()
+    func addOrUpdateContact(firstName:String?, lastName:String?, email:String?, phone:String?)
 }
 
 protocol AddOrEditContactWireFrameProtocol:class {
     
-    static func createAddOrEditContactModule(with contact:ContactModel?) -> UIViewController
+    static func createAddOrEditContactModule(with contact:ContactModel?, listRefreshDelegate:ContactListRefreshDelegate?, detailsRefreshDelegate:ContactDetailsRefreshDelegate?) -> UIViewController
 }
 
 protocol AddOrEditContactInteractorInputProtocol:class {
@@ -41,8 +55,8 @@ protocol AddOrEditContactInteractorInputProtocol:class {
     var dataManager:AddOrEditContactDataManagerInputProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
-    func createContact()
-    func updateContact()
+    func createContact(firstName:String, lastName:String?, email:String?, phoneNumber:String)
+    func updateContact(_ contact:ContactModel)
 }
 
 protocol AddOrEditContactInteractorOutputProtocol:class {
@@ -56,8 +70,8 @@ protocol AddOrEditContactDataManagerInputProtocol:class {
     
     var dataManagerOutput: AddOrEditContactDataManagerOutputProtocol? { get set }
     
-    func createContact()
-    func updateContact()
+    func createContact(firstName:String, lastName:String?, email:String?, phoneNumber:String)
+    func updateContact(_ contact:ContactModel)
     
 }
 

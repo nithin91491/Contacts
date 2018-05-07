@@ -10,7 +10,7 @@ import UIKit
 
 
 class AddOrEditContactWireFrame: AddOrEditContactWireFrameProtocol {
-    static func createAddOrEditContactModule(with contact: ContactModel?) -> UIViewController {
+    static func createAddOrEditContactModule(with contact:ContactModel?, listRefreshDelegate:ContactListRefreshDelegate?, detailsRefreshDelegate:ContactDetailsRefreshDelegate?) -> UIViewController{
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -27,6 +27,10 @@ class AddOrEditContactWireFrame: AddOrEditContactWireFrameProtocol {
             presenter.interactor = interactor
             presenter.wireFrame = wireFrame
             presenter.contact = contact
+            
+            //Set refresh delegates
+            presenter.contactListRefreshDelegate = listRefreshDelegate
+            presenter.contactDetailsRefreshDelegate = detailsRefreshDelegate
             
             interactor.presenter = presenter
             interactor.dataManager = dataManager

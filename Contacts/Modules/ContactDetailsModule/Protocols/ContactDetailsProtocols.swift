@@ -27,7 +27,7 @@ protocol ContactDetailsViewProtocol:class {
 }
 
 protocol ContactDetailsPresenterProtocol:class {
-    var view:ContactDetailsViewProtocol? { get set }
+    var view:(ContactDetailsViewProtocol & ContactDetailsRefreshDelegate)? { get set }
     var interactor:ContactDetailsInteractorInputProtocol? { get set }
     var wireFrame:ContactDetailsWireFrameProtocol? { get set }
     
@@ -41,13 +41,16 @@ protocol ContactDetailsPresenterProtocol:class {
     func email()
     func toggleFavourite(favourite:Bool)
     func editContact()
+    func refreshContactListScreen()
     
 }
 
 protocol ContactDetailsWireFrameProtocol:class {
     static func createContactDetailModule(_ contactId:Int, refreshDelegate:ContactListRefreshDelegate)->UIViewController
     
-    func presentEditContactScreen(source view:ContactDetailsViewProtocol, contact: ContactModel)
+    func presentEditContactScreen(source view:ContactDetailsViewProtocol & ContactDetailsRefreshDelegate, contact: ContactModel)
+    
+     func presentAddContactScreen(source view:ContactListViewProtocol & ContactListRefreshDelegate)
 }
 
 protocol ContactDetailsInteractorInputProtocol:class {

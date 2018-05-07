@@ -45,4 +45,13 @@ class ContactListWireFrame:ContactListWireFrameProtocol{
         }
         
     }
+    
+    func presentAddContactScreen(source view:ContactListViewProtocol & ContactListRefreshDelegate){
+        let addContactView = AddOrEditContactWireFrame.createAddOrEditContactModule(with: nil, listRefreshDelegate: view, detailsRefreshDelegate: nil)
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.present(addContactView, animated: true, completion: nil)
+        }
+        
+    }
 }

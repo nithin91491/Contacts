@@ -11,7 +11,7 @@ import MessageUI
 
 class ContactDetailsPresenter: ContactDetailsPresenterProtocol {
   
-    var view: ContactDetailsViewProtocol?
+    var view: (ContactDetailsViewProtocol & ContactDetailsRefreshDelegate)?
     
     var interactor: ContactDetailsInteractorInputProtocol?
     
@@ -50,8 +50,8 @@ class ContactDetailsPresenter: ContactDetailsPresenterProtocol {
         
         let mailController: MFMailComposeViewController = MFMailComposeViewController()
         mailController.mailComposeDelegate = view! as? MFMailComposeViewControllerDelegate
-        mailController.setSubject("")
-        mailController.setMessageBody("Sending the mail", isHTML: false)
+        mailController.setSubject("Subject")
+        mailController.setMessageBody("Template Mail body", isHTML: false)
         mailController.setToRecipients([contactModel?.email ?? ""])
         view?.showEmailController(mailController)
     }
@@ -61,7 +61,11 @@ class ContactDetailsPresenter: ContactDetailsPresenterProtocol {
     }
     
     func editContact() {
-        wireFrame?.presentEditContactScreen(source: view!, contact: contactModel!)
+        wireFrame?.presentEditContactScreen(source: view! , contact: contactModel!)
+    }
+    
+    func refreshContactListScreen() {
+        delegateContactListRefresh?.refreshData()
     }
  
 }

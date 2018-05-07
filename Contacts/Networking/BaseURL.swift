@@ -17,6 +17,7 @@ enum ApiPath : CustomStringConvertible {
     case contactsList
     case getContactDetails(id:Int)
     case updateContact(id:Int)
+    case createContact
    
     
     var description: String{
@@ -27,6 +28,8 @@ enum ApiPath : CustomStringConvertible {
             return "/contacts/\(id).json"
         case .updateContact(let id):
             return "/contacts/\(id).json"
+        case .createContact:
+            return "/contacts.json"
         }
     }
     

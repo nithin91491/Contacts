@@ -28,6 +28,11 @@ class ContactsListView: UIViewController, HUDRenderer {
         presenter?.viewDidLoad()
     }
     
+    
+    @IBAction func addNewContact(_ sender: UIBarButtonItem) {
+        presenter?.addNewContact()
+    }
+    
 }
 
 extension ContactsListView:ContactListViewProtocol, ContactListRefreshDelegate{

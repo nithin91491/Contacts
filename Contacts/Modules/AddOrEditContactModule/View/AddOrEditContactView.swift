@@ -54,7 +54,7 @@ class AddOrEditContactView: UIViewController, HUDRenderer, KeyboardObserver {
     }
     
     @IBAction func didTapDone(_ sender: UIBarButtonItem) {
-        presenter?.addOrUpdateContact()
+        presenter?.addOrUpdateContact(firstName:txfFirstName.text, lastName:txfLastName.text, email:txfEmail.text, phone:txfMobile.text)
     }
     
     
@@ -62,6 +62,14 @@ class AddOrEditContactView: UIViewController, HUDRenderer, KeyboardObserver {
 
 
 extension AddOrEditContactView : AddOrEditContactViewProtocol {
+    func showLoading() {
+        self.showActivityIndicator()
+    }
+    
+    func hideLoading() {
+        self.hideActivityIndicator()
+    }
+    
     
     
     func displayContactDetails(_ contact: ContactModel) {
@@ -75,5 +83,15 @@ extension AddOrEditContactView : AddOrEditContactViewProtocol {
         profilePicImageView.image = UIImage(data: imageData)
     }
     
+    func showValidationErrorMessage() {
+        self.showAlert(message: "Please enter valid data.")
+    }
     
+    func onError() {
+        self.showAlert(message: "Could not save the contact. Please try again.")
+    }
+    
+    func dismissScreen() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
