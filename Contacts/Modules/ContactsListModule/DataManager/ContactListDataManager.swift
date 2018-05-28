@@ -12,9 +12,12 @@ class ContactListDataManager:ContactListDataManagerInputProtocol{
     
     var dataManagerOutput:ContactListDataManagerOutputProtocol?
     
+    var requestManager: RequestManagerProtocol {
+        return RequestManager()
+    }
+    
     func retreiveContactList() {
-        
-        RequestManager.shared.request(.get, apiPath: .contactsList, httpBody: nil) { (response) in
+        requestManager.request(.get, apiPath: .contactsList, httpBody: nil) { (response) in
             switch response {
             case .success(let contactsJson):
                 

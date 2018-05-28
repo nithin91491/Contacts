@@ -13,7 +13,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Contacts-->
+        <!--Loading..-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ContactsListView" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,6 +47,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0w-mM-89F">
                                                     <rect key="frame" x="306" y="23" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="favourite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="GwC-Ar-dSc"/>
                                                         <constraint firstAttribute="width" constant="44" id="UhO-1I-73C"/>
@@ -87,7 +88,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="oXx-Ac-igu">
+                    <navigationItem key="navigationItem" title="Loading.." id="oXx-Ac-igu">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="uO3-lu-Hhd">
                             <connections>
                                 <action selector="addNewContact:" destination="BYZ-38-t0r" id="fMf-jt-91S"/>
@@ -374,24 +375,28 @@
                                             </view>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xs-LH-X05">
                                                 <rect key="frame" x="108" y="218.5" width="259" height="51"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="firstName"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Hn-g0-3Pp">
                                                 <rect key="frame" x="108" y="275.5" width="259" height="41.5"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="lastName"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uBw-uX-rPW">
                                                 <rect key="frame" x="108" y="328" width="259" height="41"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="mobile"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c8X-7e-NK4">
                                                 <rect key="frame" x="108" y="380" width="259" height="41"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="email"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>

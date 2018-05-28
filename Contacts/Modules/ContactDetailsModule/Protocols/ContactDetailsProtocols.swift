@@ -73,6 +73,7 @@ protocol ContactDetailsInteractorOutputProtocol:class {
 
 protocol ContactDetailsDataManagerInputProtocol:class {
     var dataManagerOutput:ContactDetailsDataManagerOutputProtocol? { get set }
+    var requestManager:RequestManagerProtocol { get }
     
     //INTERACTOR -> DATA MANAGER
     func retreiveContactDetails(_ contactId:Int)

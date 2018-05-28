@@ -26,7 +26,6 @@ class AddOrEditContactWireFrame: AddOrEditContactWireFrameProtocol {
             presenter.view = view
             presenter.interactor = interactor
             presenter.wireFrame = wireFrame
-            presenter.contact = contact
             
             //Set refresh delegates
             presenter.contactListRefreshDelegate = listRefreshDelegate
@@ -34,6 +33,7 @@ class AddOrEditContactWireFrame: AddOrEditContactWireFrameProtocol {
             
             interactor.presenter = presenter
             interactor.dataManager = dataManager
+            interactor.contact = contact
             
             dataManager.dataManagerOutput = interactor
             

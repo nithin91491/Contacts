@@ -70,6 +70,7 @@ protocol ContactListInteractorOutputProtocol:class {
 
 protocol ContactListDataManagerInputProtocol:class {
     var dataManagerOutput:ContactListDataManagerOutputProtocol? { get set }
+    var requestManager:RequestManagerProtocol { get }
     
     //INTERACTOR -> DATA MANAGER
     func retreiveContactList()

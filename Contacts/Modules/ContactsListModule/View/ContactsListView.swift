@@ -38,6 +38,7 @@ class ContactsListView: UIViewController, HUDRenderer {
 extension ContactsListView:ContactListViewProtocol, ContactListRefreshDelegate{
     
     func showContacts(_ contacts: [[ContactModel]]) {
+        self.navigationItem.title = "Contacts"
         self.contacts = contacts
         tableView.reloadData()
     }

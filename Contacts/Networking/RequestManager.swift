@@ -51,12 +51,20 @@ enum NetworkingError:Error, CustomStringConvertible{
     //Could not contact the server. Please try after some time.
 }
 
-class RequestManager{
-    
-    static let shared = RequestManager()
-    private init(){}
-    
-    private var cacheQueue : OperationQueue?
+
+
+protocol RequestManagerProtocol {
+    func request(_ type:RequestType,apiPath:ApiPath,queryParameters:String?, httpBody:String?, headers:([String:String])?, block:@escaping (ServiceResponse<JSON>) -> ())
+}
+
+extension RequestManagerProtocol {
+    func request(_ type:RequestType,apiPath:ApiPath,queryParameters:String? = nil, httpBody:String?, headers:([String:String])? = nil, block:@escaping (ServiceResponse<JSON>) -> ()){
+        return request(type, apiPath: apiPath, queryParameters: queryParameters, httpBody: httpBody, headers: headers, block: block)
+    }
+}
+
+class RequestManager:RequestManagerProtocol{
+
     
     func request(_ type:RequestType,apiPath:ApiPath,queryParameters:String? = nil, httpBody:String?, headers:([String:String])? = nil, block:@escaping (ServiceResponse<JSON>) -> ()){
         

@@ -31,12 +31,6 @@ class AddOrEditContactView: UIViewController, HUDRenderer, KeyboardObserver {
     
     var presenter: AddOrEditContactPresenterProtocol?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        presenter?.viewDidLoad()
-        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,6 +42,10 @@ class AddOrEditContactView: UIViewController, HUDRenderer, KeyboardObserver {
         self.registerForKeyboardNotifications(shouldRegister: false)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter?.viewDidLoad()
+    }
     
     @IBAction func didTapCancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -70,8 +68,6 @@ extension AddOrEditContactView : AddOrEditContactViewProtocol {
         self.hideActivityIndicator()
     }
     
-    
-    
     func displayContactDetails(_ contact: ContactModel) {
         txfEmail.text = contact.email
         txfMobile.text = contact.phoneNumber
@@ -83,15 +79,21 @@ extension AddOrEditContactView : AddOrEditContactViewProtocol {
         profilePicImageView.image = UIImage(data: imageData)
     }
     
-    func showValidationErrorMessage() {
-        self.showAlert(message: "Please enter valid data.")
+    func showValidationErrorMessage(_ message:String) {
+        self.showAlert(title:"Failure", message: message, okButtonText: "OK", cancelButtonText: nil)
     }
     
-    func onError() {
-        self.showAlert(message: "Could not save the contact. Please try again.")
+    func onError(_ message: String) {
+        self.showAlert(message: message)
     }
     
     func dismissScreen() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showSuccessAlert(_ message: String) {
+        self.showAlert(title:"Success", message: message, okButtonText: "OK", cancelButtonText: nil) { (success) in
+            self.dismissScreen()
+        }
     }
 }

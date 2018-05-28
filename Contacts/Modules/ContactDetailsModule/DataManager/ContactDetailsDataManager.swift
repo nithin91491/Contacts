@@ -11,10 +11,14 @@ import Foundation
 class ContactDetailsDataManager: ContactDetailsDataManagerInputProtocol {
 
     var dataManagerOutput: ContactDetailsDataManagerOutputProtocol?
+    
+    var requestManager:RequestManagerProtocol {
+        return RequestManager()
+    }
  
     func retreiveContactDetails(_ contactId: Int) {
         
-        RequestManager.shared.request(.get, apiPath: .getContactDetails(id: contactId), httpBody: nil) { (response) in
+        requestManager.request(.get, apiPath: .getContactDetails(id: contactId), httpBody: nil) { (response) in
             switch response {
             case .success(let json):
                 
@@ -44,7 +48,7 @@ class ContactDetailsDataManager: ContactDetailsDataManagerInputProtocol {
         
         let body = ["favorite":favourite].jsonString()
         
-        RequestManager.shared.request(.put, apiPath: .updateContact(id: contactId), httpBody: body) { (response) in
+        requestManager.request(.put, apiPath: .updateContact(id: contactId), httpBody: body) { (response) in
             switch response {
             case .success(_):
                 self.dataManagerOutput?.didToggleFavourite()
